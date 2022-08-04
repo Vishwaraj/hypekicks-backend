@@ -1,0 +1,290 @@
+//Schema -
+//products 
+//name, image, description, category={every day, new releases, trending, }, price, 
+//users - 
+//name, email, password, address fields, phone number
+
+const productObject = {
+    name: 'xyz',
+    image: 'xyz',
+    description: 'xyz',
+    category: 'every day',
+    price: 1
+}
+
+export const dataArray = [
+    {
+        name: 'Nike GO FLYEASE ‘WHITE / LIGHT BONE’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/6-44-850x850.jpg',
+        description: 'Ditch the laces and get outside. These kicks feature Nike’s revolutionary FlyEase technology, making on-and-off a breeze. With a heel that pivots open for a totally hands-free entry, they’re great for people with limited mobility—or anyone who wants a quicker way to get going.',
+        category: 'every day',
+        price: 11895
+    },
+    {
+        name: 'Nike CRATER IMPACT ‘GREY FOG / WHITE’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-83.jpg',
+        description: 'Nike Crater Impact is part of our sustainability journey to transform trash into shoes that tread a little lighter. Made from at least 25% recycled material by weight, it brings in unique design choices that reduce waste when compared with traditional methods—like an embroidered Swoosh logo, efficient overlays and of course its Crater Foam midsole.',
+        category: 'every day',
+        price: 8295
+    },
+    {
+        name: 'Nike BLAZER LOW 77 JUMBO ‘BOLD RED’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-63-850x850.jpg',
+        description: 'They say, “Don’t fix what works.” We say, “Perfect it.” The hoops icon turned wardrobe superstar gets rethought with an oversized Swoosh, thick stitching and jumbo laces. It’s classic simplicity meets big and bold—no wonder it’s been praised by the streets since ’77. Oversized Swoosh design and jumbo laces that are easier to tie add a bold look to any outfit. Capturing the essence of the classic Blazer, the stitched leather overlays and soft suede accent on the toe add heritage hoops style. Extra-thick thread for the stitching adds a bold, defiant touch.Raised herringbone pattern on the rubber outsole exaggerates the classic look.Plush foam tongue offers comfort worth salivating over.',
+        category: 'every day',
+        price: 8595
+    },
+    {
+        name: 'Adidas SUPERSTAR ‘CORE BLACK/CLOUD WHITE’',
+        image: 'https://superkicks.in/wp-content/uploads/2020/01/1-1-850x850.jpg',
+        description: 'Originally made for basketball courts in the ’70s. Celebrated by hip hop royalty in the ’80s. The adidas Superstar shoe is now a lifestyle staple for streetwear enthusiasts. The world-famous shell toe feature remains, providing style and protection. Just like it did on the B-ball courts back in the day.',
+        category: 'every day',
+        price: 5999
+    },
+    {
+        name: 'adidas originals OZELIA ‘CRYSTAL WHITE / CLOUD WHITE’',
+        image: 'xyz',
+        description: 'We may be a long way from the ’90s, but these Ozelia Shoes are rooted in that loud, experimental era. Inspired by the adidas archives, the bold trainers have a chunky build that’s all about being noticed. They’re sleek with a fast look, and when your days are fast-paced, the Adiprene cushioning helps out on the comfort side of things. This product is made with recycled content as part of our ambition to end plastic waste. 20% of pieces used to make the upper are made with minimum 50% recycled content.',
+        category: 'every day',
+        price: 8249
+    },
+    {
+        name: 'Nike AIR JORDAN 5 ‘ GREEN BEAN ‘',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-49-850x816.jpg',
+        description: 'The fan favorite from 2006 is back in all its reflective retro glory. Its entirely Silver upper lights up at night with a reflective beam you can’t miss. And during the day, its Green Bean accents on the Jumpman, lining, and midsole add flavor to an all-over Silver upper that otherwise keeps it muted and no-nonsense. Whether you want to shine when the cameras are bright or stay understated with some big pop after the lights go down, the Air Jordan 5 “Green Bean” stays true and progressive with its OG makeup and new-millennium style.',
+        category: 'every day',
+        price: 13796
+    },
+    {
+        name: 'adidas originals FORUM LOW ‘CLOUD WHITE’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-18-850x850.jpg',
+        description: 'More than just a shoe, it’s a statement. The adidas Forum hit the scene in ’84 and gained major love on both the hardwood and in the music biz. This pair of the classic shoes brings back the ’80s attitude, the explosive hardwood energy and the iconic removable strap ankle design, distilled into a low top version meant for the streets.',
+        category: 'every day',
+        price: 6749
+    }, 
+    {
+        name: 'adidas originals FORUM MID ‘CORE BLACK / CLOUD WHITE’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-20-850x850.jpg',
+        description: 'Let’s take a moment to honor an icon. Is it the gravity-defying B-ball legend from the ’80s? Or perhaps the status shoe that adorned the feet of rappers? Both, in fact. The adidas Forum shoes have dominated the hardwood and the streets, and they’re back in a mid top version to take your moves to the next level. Slip into the unmistakable style, now in luxurious coated leather, and flaunt that pure class.',
+        category: 'every day',
+        price: 7499
+    }, 
+    {
+        name: 'adidas originals OZWEEGO ‘CLOUD WHITE/ CORE BLACK’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-35-850x816.jpg',
+        description: 'Bigger is better. These chunky adidas OZWEEGO Shoes fuse late-’90s and early-’00s style with futuristic design lines. They’re big but surprisingly soft and lightweight, perfect for kicking it and getting stuff done. Keep it fresh with the mesh, suede and TPU upper combos. The targeted support in the forefoot and heel keeps you feeling solid on your feet all day long.',
+        category: 'every day',
+        price: 8249
+    }, 
+    {
+        name: 'New Balance 57/40 ‘ SEA SALT / BLACK ‘',
+        image: 'https://superkicks.in/wp-content/uploads/2022/05/2-91-850x816.jpg',
+        description: 'The 57/40 is the answer to a question that is simple, yet astronomical in scale. What if we updated the most New Balance shoe of all time – the 574? Despite its legacy of unassuming, almost effortless versatility, the original 574 was a unique design for its era, a hybrid road/trail design that didn’t lean on visible technical features. The 57/40 approaches the hybrid concept with a few extra years’ worth of design developments to explore, and creates a new perspective on an iconic design. An overall sleeker silhouette provided by a slimmer last combines with a range of exaggerated features. The unique midsole combines a flared take on the classic 574 construction with ‘90s tech inspired details, while the mudguard and eyerow feature the distinctive wavy embellishments of the ‘80s.',
+        category: 'every day',
+        price: 11999
+    }, 
+    {
+        name: 'Nike AIR FORCE 1 MID ’07 ‘ OLIVE GREEN / TOTAL ORANGE ‘',
+        image: 'https://superkicks.in/wp-content/uploads/2022/05/1-102-850x816.jpg',
+        description: 'Celebrating those things we can’t do without, this rendition of the hoops original aims to bring the outdoors inside and vice versa. Witty Swoosh characters add inspiration to your day, a brushed collar lining delivers the comfort of home and textured leather puts an expressive spin on what you know best: era-echoing, ’80s construction and nothin’-but-net style. Oh, and the jewelled Swoosh design pays tribute to 40 years of AF-1 trend-setting, while Total Orange Swooshes and Dark Driftwood embroidery on the heel nod to the original Nike shoe box.',
+        category: 'every day',
+        price: 10496
+    }, 
+    {
+        name: 'Nike KYRIE INFINITY EP 8 ‘ MAN MACHINE ‘',
+        image: 'https://superkicks.in/wp-content/uploads/2022/05/1-136-850x850.jpg',
+        description: 'The faster Kyrie slows down, the quicker he can speed up or change direction. His ability to control his movement keeps defenders guessing—and him in control. The Kyrie Infinity EP provides a cushioned, custom fit and traction up the sides, allowing players to accelerate and decelerate on demand and take advantage of the separation they create.',
+        category: 'every day',
+        price: 8621
+    }, 
+    {
+        name: 'adidas originals STAN SMITH PRIDE',
+        image: 'https://superkicks.in/wp-content/uploads/2022/05/1-99-850x816.jpg',
+        description: 'The 2022 adidas X Kris Andrew Small Pride Collection was inspired by the Stonewall Activists of the Stonewall Uprising in 1969. Together adidas and Kris Andrew Small offer a collection in solidarity & celebration of the LGBTQIA+ community’s past & present, honouring unique belonging – creating a colourful & diverse graphic message among this inclusive & optimistic collection. This partnership is also adjacent to adidas’ two key Global Purpose Partners, Athlete Ally & Stonewall UK. Love. Diversity. Joy. All things we celebrate fully, and these adidas Stan Smith shoes happen to do it extra loudly. Graphics appear sprawled throughout, making a powerful statement in vibrant colours.',
+        category: 'every day',
+        price: 7499
+    }, 
+    {
+        name: 'Nike AIR MORE UPTEMPO ’96 ‘ IRON GREY ‘',
+        image: 'https://superkicks.in/wp-content/uploads/2022/04/1-2-55-850x816.jpg',
+        description: 'The Nike Air More Uptempo ’96 brings classic basketball back to the streets. A collage of the beloved Swoosh logo alongside visible Max Air cushioning equates to an of-era, chunky design for a look that will never fade. Elastic straps over the tongue keep your style sharp, whether you rock them laced or unlaced. Originally designed for performance hoops, the Max Air units add lightweight, durable cushioning. Synthetic leather underlays add dimension beneath the iconic “AIR” lettering. Round laces match the 2 round pull tabs for added style points while making it easy to lace up and take on and off.',
+        category: 'every day',
+        price: 11996
+    }, 
+    {
+        name: 'Nike WAFFLE ONE ‘ COCONUT MILK / LIGHT CHOCOLATE ‘',
+        image: 'xyz',
+        description: 'Bringing a new look to the iconic Waffle franchise, the Nike Waffle One balances everything you love most about heritage Nike running with fresh innovations.Its new durable plastic heel clip adds energy, while a mixture of transparent mesh and luscious suedes get you ready for summertime.The new springy midsole features the classic wedge shape while the updated Waffle outsole provides a level of incomparable comfort',
+        category: 'every day',
+        price: 6221
+    }, 
+    {
+        name: 'Nike AIR TRAINER 1 ‘ PHOTON DUST/LIGHT SMOKE ‘',
+        image: 'https://superkicks.in/wp-content/uploads/2022/04/1-2-70-850x816.jpg',
+        description: 'From the gym to the courts and everywhere in between, the famed cross trainer from ’87 lets you travel without a glitch. Details like the forefoot strap nod to the original, while premium nubuck leather (done up in an easy-to-style Photon Dust) ages to perfection. Designed at the time for performance sports, the heel’s Air cushioning and mid-height collar keep your ride comfortable and secure for today’s adventures.',
+        category: 'every day',
+        price: 8921
+    },
+    {
+        name: 'Nike AIR MAX PENNY ONE ‘WHITE / GREY’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/07/1-74-850x850.jpg',
+        description: 'Paying tribute to basketball icon Penny Hardaway, the Nike Air Max Penny is a near exact replica of the hoops original. From its jeweled Swoosh to the wing piping on the sides, these original details celebrate both your retro style and a b-ball legend. Plush and comfortable, Max Air cushioning has just the right amount of support. Leather is easy to clean. Rubber outsole adds durability and traction. Heel and tongue pull tabs for easy on and off.',
+        category: 'new releases',
+        price: 16995
+    },
+    {
+        name: 'Nike AIR MAX 90 ‘SUN CLUB’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/07/1-69-850x850.jpg',
+        description: 'Strap a little sunshine to your feet with the Nike Air Max 90 SE. Carefree details and fresh colors deliver a beach day forecast. Airy, summertime fabrics are made from at least 20% recycled materials by weight and keep the classic 90 aesthetic you know best: iconic Waffle sole, durable accents and visible Air cushioning.',
+        category: 'new releases',
+        price: 11895
+    },
+    {
+        name: 'Nike AIR MAX 90 TERRASCAPE',
+        image: 'https://superkicks.in/wp-content/uploads/2022/07/1-68-850x850.jpg',
+        description: 'Designed to Handle the Grind The new outsole design features translucent Nike Grind rubber and wraps onto the mudguard for added durability. Breathable mesh on the upper keeps it airy and lightweight while overlays on the sides add toughness that can handle streets or trails. Classic Meets Modern To put it bluntly, it’s a classic made for today. Featuring the new Terrascape logo on the tongue, sleek triple-stitching around the collar for a sporty look and durable Crater foam, it’s tried and true, perfected. Perfectly 90Nothing as fly, nothing as comfortable, nothing as proven—staying true to its original roots, it features the iconic Waffle outsole, stitched overlays and plastic accents on the eyestays.',
+        category: 'new releases',
+        price: 13995
+    },
+    {
+        name: 'Nike WMN’S AIR FORCE 1 LOW ‘ORANGE PAISLEY’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/07/1-67-850x850.jpg',
+        description: 'The radiance lives on with the b-ball original. Crossing hardwood comfort with off-court flare, it puts a fresh spin on what you know best: ’80s construction and bold details. From pristine materials to the cupsole design, it delivers durable style that’s smoother than backboard glass.Originally designed for performance hoops, the Air cushioning delivers lasting comfort. Rubber outsole with classic pivot circle pattern adds traction and durability. Padded, low-cut collar looks sleek and feels great',
+        category: 'new releases',
+        price: 8695
+    },
+    {
+        name: 'Nike BLAZER LOW ’77 VINTAGE',
+        image: 'https://superkicks.in/wp-content/uploads/2021/08/1-2-850x850.jpg',
+        description: 'Praised by the streets for its classic simplicity and comfort, the Nike Blazer Low ’77 Vintage returns with its low-profile style and heritage b-ball looks.Featuring luscious suede details, a retro Swoosh design and a super-soft collar, it’s the must-have wardrobe staple that will take you everywhere.',
+        category: 'new releases',
+        price: 7195
+    },
+    {
+        name: 'adidas originals CAMPUS 00S ‘GREY ONE / CRYSTAL WHITE’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/07/1-58-850x850.jpg',
+        description: 'The adidas Campus shoes have been a long-standing staple on our cultural landscape. Although they made their debut on the court, they were quickly adopted just about everywhere else. With these Campus 00s trainers, we move the iconic silhouette in another direction, giving a crooked twist to the original collegiate colourways and playing with bigger proportions. They’re done with a premium suede upper in faded tones, which rides on an off-white midsole — a clear connect to the Campus legacy. Made in part with recycled content generated from production waste, e.g. cutting scraps, and post-consumer household waste to avoid the larger environmental impact of producing virgin content.',
+        category: 'new releases',
+        price: 8999
+    },
+    {
+        name: 'adidas originals T-MAC 3 RESTOMOD “RAPTORS”',
+        image: 'https://superkicks.in/wp-content/uploads/2022/07/1-15-850x850.jpg',
+        description: 'The adidas T-MAC 3 Restomod recalls the early days of the high school-to-pro hooper, decorating the updated retro model with croc-skin exteriors to mimic the now-extinct raptor. Pin-striping on the interior as well as the silver piping on the medial side nod to Toronto’s unforgettable jerseys, while a “97” callout on the heel and tongue nod to Tracy’s rookie season.',
+        category: 'new releases',
+        price: 13999
+    },
+    {
+        name: 'Nike AIR JORDAN 3 ‘DARK IRIS’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/07/1-28-850x850.jpg',
+        description: 'It’s the return of a legend: The Tinker Hatfield design that solidified MJ’s relationship with Nike is back with a clean white upper that’s energised by flashes of Dark Iris. Cracked Black and Cement Grey leather on the toe and heel nod to the iconic “Black Cement” release from ’94, bridging past with present. And underfoot, you can always count on Air cushioning to keep you going.',
+        category: 'new releases',
+        price: 16595
+    },
+    {
+        name: 'Nike AIR JORDAN 4 ‘INFRARED’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-125-850x850.jpg',
+        description: 'What’s in a colour? Coveted style, a lot of history and enough character to define your entire fit. Bursts of Infrared bring the shoe that first took flight in 1989 back to centre stage. The electric neon, made famous by another Tinker Hatfield classic, pairs perfectly with varying shades of grey throughout for a bold look that’s easy to style. Its unique “wings” allow you to customise your laces, black accents boost the contrast and draw all eyes to the flashy Infrared detailing, and Air cushioning delivers the all-star comfort you love. Lace up and let the Air Jordan 4 do all the talking.',
+        category: 'new releases',
+        price: 18695
+    },
+    {
+        name: 'adidas originals OZRAH ‘CRYSTAL WHITE / ALUMINIUM’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/07/1-13-850x850.jpg',
+        description: 'Break the rules. Challenge the norms. Dare to do things differently. Striking and unexpected, the adidas OZRAH shoes step into a league of their own with a wrapped TPU cage and edgy style. And because holding back isn’t really how they roll, plush cushioning with Adiprene+ tech takes your comfort to the next level. Made in part with recycled content generated from production waste, e.g. cutting scraps, and post-consumer household waste to avoid the larger environmental impact of producing virgin content.',
+        category: 'new releases',
+        price: 12999
+    },
+    {
+        name: 'adidas originals FORUM LOW ‘CHALK WHITE / CREW RED’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/07/1-11-850x850.jpg',
+        description: 'Look good or do good for the planet? We don’t think that’s a choice you should have to make. That’s why we made these adidas Forum shoes with Parley Ocean Plastic that can be traced back to its origins. Enjoy walking with retro B-ball swagger wherever this pair takes you. This shoe’s upper is made with a technical yarn which contains at least 50% Parley Ocean Plastic — upcycled plastic waste, intercepted on remote islands, beaches, coastal communities and shorelines, preventing it from polluting our ocean. The other 50% of the yarn is recycled polyester. Scan the QR code on your product to find out more about the story behind how your product was created.',
+        category: 'new releases',
+        price: 9999
+    }, 
+    {
+        name: 'Nike AIR MAX 90 NRG ‘ASHEN SLATE’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-104-850x850.jpg',
+        description: 'Lace up and feel the legacy. Produced at the intersection of art, music and culture, this champion running shoe helped define the ‘90s. Worn by presidents, revolutionized through collabs and celebrated through rare colorways, its striking visuals, Waffle outsole, and exposed Air cushioning keep it alive and well. Originally designed for performance running, visible Air cushioning puts the history of comfort beneath your feet. The translucent rubber Waffle outsole delivers traction, durability and heritage style. Premium suede on the upper delivers a classic look made for summertime. Breathable and airy woven fabric on the vamp and collar help keep you comfortable. Padded, low-cut collar looks sleek and feels great.',
+        category: 'popular',
+        price: 9596
+    },
+    {
+        name: 'Nike AIR TRAINER 1 ‘MIDNIGHT NAVY’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-23-1-850x850.jpg',
+        description: 'The original cross-trainer is back to true form with a rare reissue of white, Medium Grey and Midnight Navy. Not seen since the late ’80s, the classic colours let you cross between the suburbs and city centre without a glitch. The forefoot strap adds slick, retro appeal, while soft leather breaks in easily and contrasts against tumbled leather on the Swoosh for a perfect finish. If that’s not enough, Air cushioning brings tried-and-tested comfort wherever you are. So where will you take your Trainers?',
+        category: 'popular',
+        price: 11895
+    },
+    {
+        name: 'Nike AIR HUARACHE LETHAL PINK',
+        image: 'https://superkicks.in/wp-content/uploads/2022/01/DD1068-003-850x816.jpg',
+        description: 'Built to fit your foot and designed for comfort, the Nike Air Huarache brings back a street-level favorite. Soft leather accents on the upper mix with super-breathable, perfectly shined neoprene-like fabric for easy styling. The low-cut collar and bootie-like construction keep it sleek. Its iconic heel clip and stripped away branding keep the early ’90s look you love.',
+        category: 'popular',
+        price: 6177
+    },
+    {
+        name: 'Nike AIR JORDAN 13 ‘ NAVY ‘',
+        image: 'xyz',
+        description: 'Michael Jordan earned the nickname “Black Cat” by his superior athletic ability and prowess at both ends of the court. That nickname became the muse for the Tinker Hatfield-designed Air Jordan 13. Featuring a panther paw-like sole and “cat eye” holograph, Michael rode the mid-top shoe all the way to his 6th ring in ’98, the last triumph of his legendary career. The Air Jordan 13 Retro brings back the stealthy, shrouded design with a fresh mix of colors and textures.',
+        category: 'popular',
+        price: 12446
+    },
+    {
+        name: 'Nike LEBRON 19 ‘ANTHRACITE / GREEN GLOW ‘',
+        image: 'https://superkicks.in/wp-content/uploads/2022/04/1-2-63-850x816.jpg',
+        description: 'LeBron thrives when stakes are high and the pressure’s on. The LeBron 19 harnesses that energy with a locked-in fit and an updated cushioning system. The snug inner sleeve is pulled together by a sculpted overlay that the laces feed through to help prevent the foot from moving inside the shoe. Cushioned pods around the collar and tongue add comfort while reducing weight, giving players the secure feel and confidence to go all out when the game is on the line.',
+        category: 'popular',
+        price: 13196
+    },
+    {
+        name: 'Puma RS-X3 SUPER SNEAKERS',
+        image: 'https://superkicks.in/wp-content/uploads/2020/07/super-850x850.jpg.webp',
+        description: 'For people who don’t settle for the norm. For people who push the boundaries. For people who break conventions. The X3 takes the classic RS design to a whole new level. It features strong materials, bold colours inspired by old-school video games and a mesh upper. If you’re looking for a shoe that takes it to the extreme, look no further.',
+        category: 'popular',
+        price: 5399
+    },
+    {
+        name: 'Vans OLD SKOOL ‘BASIL / TRUE WHITE’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-169-850x850.jpg',
+        description: 'First known as the Vans #36, the Old Skool debuted in 1977 with a unique new addition: a random doodle drawn by founder Paul Van Doren, and originally referred to as the “jazz stripe.” Today, the famous Vans Sidestripe has become the unmistakable-and instantly recognizable-hallmark of the Vans brand. Featuring classic gum-colored sidewalls, the Gum Old Skool pays homage to our heritage while ensuring that this low top, lace-up shoe remains as iconic as ever. Made with durable suede and canvas uppers, it also includes re-enforced toe caps, supportive padded collars, and signature rubber waffle outsoles.',
+        category: 'trending',
+        price: 4999
+    },
+    {
+        name: 'adidas originals ADI2000 ‘MAGIC MAUVE / CORE BLACK',
+        image: 'https://superkicks.in/wp-content/uploads/2022/07/1-1-850x850.jpg',
+        description: 'Take a sweet trip back to long summer days that last forever. Lollipop colours give you an extra dollop of sugar on these adidas shoes. OG design details from the 2000s keep your trainer game on point. Mix it up with smooth leather and suede on the upper. Enough said. Made in part with recycled content generated from production waste, e.g., cutting scraps and post-consumer household waste, to avoid the larger environmental impact of producing virgin content.',
+        category: 'trending',
+        price: 9999
+    },
+    {
+        name: 'Nike AIR JORDAN 7 ‘CITRUS’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-145-850x850.jpg',
+        description: 'Fresh-squeezed style is coming your way. Bringing back the energetic colorway that dropped in 2006, this Air Jordan 7 celebrates the 30th anniversary of the title-winning silhouette. Premium Black nubuck contrasts against lively Citrus accents, including color-popped stitching and embroidered Jumpman. The Varsity Red liner and 23 on the heel keep the championship legacy alive. Go ahead, take a sip and refresh your step.',
+        category: 'trending',
+        price: 18395
+    },
+    {
+        name: 'Nike AIR MAX 95 OG ‘DARK BEETROOT’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-160-850x850.jpg',
+        description: 'Taking inspiration from the human body and ’90s track aesthetics, the Air Max 95 mixes unbelievable comfort with fast-paced style. The wavy side panels add natural flow to any outfit while visible Nike Air in the heel and forefoot delivers performance comfort. Upper draws inspiration from the human body—the midsole represents the spine, graduated panels are the muscles and the laces are the shoe’s ribs. Originally designed for performance running, visible Air cushioning in the heel and forefoot put the history of comfort beneath your feet. Flex grooves in the midsole and outsole let you move freely. Rubber outsole delivers traction and durability.',
+        category: 'trending',
+        price: 14995
+    },
+    {
+        name: 'Nike AIR MAX PENNY 1 ‘ORLANDO’',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-25-1-850x850.jpg',
+        description: 'Paying tribute to basketball icon Penny Hardaway, the Nike Air Max Penny is a near exact replica of the hoops original. From its jeweled Swoosh to the wing piping on the sides, these original details celebrate both your retro style and a b-ball legend. Plush and comfortable, Max Air cushioning has just the right amount of support. Synthetic leather is easy to clean. Rubber outsole adds durability and traction. Heel and tongue pull tabs for easy on and off.',
+        category: 'trending',
+        price: 16995
+    },
+    {
+        name: 'Nike WMN’S AIR JORDAN 1 LOW ‘ IRIS WHISPER/SAIL ‘',
+        image: 'https://superkicks.in/wp-content/uploads/2022/06/1-96-850x850.jpg',
+        description: 'Stand out to fit in. It’s the classic AJ1 look you love, made special for summer with sky blue leather, a fun speckled sole and crisp white canvas. The embroidered Wings logo on the heel adds a premium finish. Air cushioning in the heel delivers tried and true comfort. Durable leather upper with canvas breaks in beautifully for all-day wear.Rubber outsoles add traction on a variety of surfaces.',
+        category: 'trending',
+        price: 9695
+    }
+];
+
