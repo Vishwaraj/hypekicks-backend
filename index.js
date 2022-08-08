@@ -2,8 +2,14 @@ import express, { response } from 'express';
 import {MongoClient, ObjectId} from 'mongodb';
 import cors from "cors";
 import bcrypt from "bcrypt";
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import Stripe from 'stripe';
 
 
+
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -155,7 +161,6 @@ app.delete('/cart', async function(request, response) {
     const id = request.body.id;
     
     const result = await client.db("hypekicks-db").collection("cart").deleteOne({_id: ObjectId(id)})
-
     response.send(result);
     console.log(result);
 
@@ -180,6 +185,152 @@ app.put('/profile-page/addresses', async function(request, response) {
 
 
 
+//------------------------------------BILLING PAGE CODE------------------------------------------------
+
+
+//billing address code -
+app.post('/cart/billing-details', async function(request, response) {
+  
+    const username = request.body.username;
+    const result = await client.db("hypekicks-db").collection("users").findOne({userName: username})
+    response.send(result.address);
+})
+
+// update address code - 
+app.put('/cart/billing-details', async function(request, response) {
+
+    const address = request.body;
+    const username = request.headers.username;
+    const result = await client.db("hypekicks-db").collection("users").updateOne({userName: username}, {$set: {address: address}})
+    response.send(result);
+   
+})
+
+
+// Add sneakers to orders collection - 
+
+
+//find whether user already exists - 
+const findUserOrders = async (username) => {
+    const result = await client.db("hypekicks-db").collection("orders").findOne({user: username})
+    console.log(result);
+    return result
+}
+
+
+
+
+app.post('/cart/order-success', async function(request, response) {
+    const username = await request.body.username;
+
+    const checkUserExists = await findUserOrders(username);
+
+
+    const products = await client.db("hypekicks-db").collection("cart").find({}).toArray();
+
+
+    const currentDate = new Date().toLocaleDateString();
+    const currentTime = new Date().toLocaleTimeString();
+
+    const order = {
+        user: username,
+        sneakers: products,
+        date: currentDate,
+        time: currentTime
+    }
+
+        const result = await client.db("hypekicks-db").collection("orders").insertOne(order);
+        console.log('another result', result)
+
+        const emptyCart = await client.db("hypekicks-db").collection("cart").deleteMany({});
+        response.send({result:result, emptyCart:emptyCart});
+
+
+})
+
+
+//--------------------------------ORDERS PROFILE PAGE CODE----------------------------------------------
+
+
+app.post('/profile-page/orders', async function(request, response) {
+    
+const user = request.body.user;
+
+const result = await client.db("hypekicks-db").collection("orders").find({user: user}).toArray();
+
+const orderedProducts = [];
+result.map((order) => {
+    order.sneakers.map((prod) => orderedProducts.push(prod));
+})
+console.log(orderedProducts);
+
+response.send({result: result, products: orderedProducts});
+
+})
+
+
+//-------------------------------PROFILE ACCOUNT DETAILS CODE------------------------------------------
+
+
+app.put('/profile-page/account-details', async function(request, response) {
+    const user = request.body.user;
+    const update = request.body.update;
+    
+    const result = await client.db("hypekicks-db").collection("users").updateOne({userName: user}, {
+        $set: {firstName: update.firstName, lastName: update.lastName, email: update.email}
+    })
+
+    response.send(result);
+})
+
+app.post('/profile-page/account-details', async function(request, response) {
+    const user = await request.body.user;
+
+    const result = await client.db("hypekicks-db").collection("users").findOne({userName: user})
+    console.log(result);
+    response.send(result);
+})
+
+ 
+
+
+//--------------------------------STRIPE INTEGRATION CODE---------------------------------------------
+
+const stripe = Stripe(process.env.STRIPE_KEY);
+
+const CLIENT_URL = 'http://localhost:3000';
+
+app.post('/create-checkout-session', async (request, response) => {
+
+  const cartItems = await client.db("hypekicks-db").collection("cart").find({}).toArray();
+
+  const line_items = cartItems.map((sneaker)=>{
+    return (
+        {
+            price_data: {
+                currency: 'inr',
+                product_data: {
+                    name: sneaker.name,
+                    images: [sneaker.image],
+                },
+                unit_amount: sneaker.price * 100,
+            },
+            quantity: sneaker.quantity
+          }
+    );
+  })
+
+
+  const session = await stripe.checkout.sessions.create({
+    line_items,
+    mode: 'payment',
+    success_url: `${CLIENT_URL}/cart/order-success`,
+    cancel_url: `${CLIENT_URL}/cart/billing-details`,
+  });
+
+  response.send({stripeUrl : session.url})
+});
+
 
 
 
@@ -203,6 +354,7 @@ const checkUserExists = async (username) => {
 }
 
 
+
 //for login
 app.post('/login', async function(request, response) {
     const {username, password} = request.body;
@@ -218,7 +370,11 @@ app.post('/login', async function(request, response) {
         const isPasswordMatch = await bcrypt.compare(password, storedPassword);
 
         if(isPasswordMatch) {
-            response.send({message: 'Succesful login', user: request.body})
+
+            //creating token
+            var token = jwt.sign({id : checkUser._id}, process.env.SECRET_KEY);
+
+            response.send({message: 'Succesful login', user: request.body, token: token})
         } else {
             response.status(400).send({message: 'Invalid Credentials'})
         }
