@@ -1,11 +1,12 @@
 import express from 'express';
 import {client} from '../index.js';
 import { ObjectId } from 'mongodb';
+import {auth} from '../middleware/auth.js';
 const router = express.Router();
 
 
 
-router.post('/', async function(request, response) {
+router.post('/', auth , async function(request, response) {
 
     const user = request.body.user;
     const result = await client.db("hypekicks-db").collection("cart").find({user: user}).toArray();
@@ -23,7 +24,7 @@ router.delete('/', async function(request, response) {
 
 })
 
-router.post('/billing-details', async function(request, response) {
+router.post('/billing-details', auth ,async function(request, response) {
   
     const username = request.body.username;
     const result = await client.db("hypekicks-db").collection("users").findOne({userName: username})
@@ -31,7 +32,7 @@ router.post('/billing-details', async function(request, response) {
 })
 
 // update address code - 
-router.put('/billing-details', async function(request, response) {
+router.put('/billing-details', auth ,async function(request, response) {
 
     const address = request.body;
     const username = request.headers.username;
@@ -54,10 +55,8 @@ const findUserOrders = async (username) => {
 
 
 
-router.post('/order-success', async function(request, response) {
+router.post('/order-success', auth ,async function(request, response) {
     const username = await request.body.username;
-
-    const checkUserExists = await findUserOrders(username);
 
 
     const products = await client.db("hypekicks-db").collection("cart").find({}).toArray();

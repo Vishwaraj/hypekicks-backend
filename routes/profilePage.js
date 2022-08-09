@@ -1,10 +1,11 @@
 import express from 'express';
 import {client} from '../index.js';
 import { ObjectId } from 'mongodb';
+import { auth } from '../middleware/auth.js';
 const router = express.Router();
 
 
-router.put('/addresses', async function(request, response) {
+router.put('/addresses', auth ,async function(request, response) {
     const address = request.body;
     const userName = request.headers.username;
     
@@ -21,7 +22,7 @@ router.put('/addresses', async function(request, response) {
 
 
 
-router.post('/orders', async function(request, response) {
+router.post('/orders', auth ,async function(request, response) {
     
 const user = request.body.user;
 
@@ -38,7 +39,7 @@ response.send({result: result, products: orderedProducts});
 })
 
 
-router.put('/account-details', async function(request, response) {
+router.put('/account-details', auth ,async function(request, response) {
     const user = request.body.user;
     const update = request.body.update;
     
@@ -49,8 +50,9 @@ router.put('/account-details', async function(request, response) {
     response.send(result);
 })
 
-router.post('/account-details', async function(request, response) {
+router.post('/account-details', auth ,async function(request, response) {
     const user = await request.body.user;
+
 
     const result = await client.db("hypekicks-db").collection("users").findOne({userName: user})
 

@@ -2,10 +2,11 @@ import express from 'express';
 import {client} from '../index.js';
 import {ObjectId} from 'mongodb';
 const router = express.Router();
+import {auth} from '../middleware/auth.js';
 
 
 
-router.get('/', async function(request, response) {
+router.get('/', auth ,async function(request, response) {
 
     
     const result = await client.db("hypekicks-db").collection("sneakers").find({}).toArray();
@@ -14,7 +15,7 @@ router.get('/', async function(request, response) {
 
 });
 
-router.get('/new-releases', async function(request, response) {
+router.get('/new-releases', auth ,async function(request, response) {
    
     const result = await client.db("hypekicks-db").collection("sneakers").find({
       category: 'new-releases'
@@ -25,7 +26,7 @@ router.get('/new-releases', async function(request, response) {
   
   
   //route to get popular
-  router.get('/popular', async function(request, response) {
+  router.get('/popular', auth ,async function(request, response) {
       const result = await client.db("hypekicks-db").collection("sneakers").find({
           category: 'popular'
       }).toArray();
@@ -35,21 +36,21 @@ router.get('/new-releases', async function(request, response) {
   
   //route to get trending 
   
-  router.get('/trending', async function(request, response) {
+  router.get('/trending', auth ,async function(request, response) {
       const result = await client.db("hypekicks-db").collection("sneakers").find({
           category: 'trending'
       }).toArray();
       response.send(result);
   })
   
-  router.get('/all', async function(request, response) {
+  router.get('/all', auth ,async function(request, response) {
       const result = await client.db("hypekicks-db").collection("sneakers").find({}).toArray();
       response.send(result);
   })
   
   
   //route for single product
-  router.get('/single-product/:productID', async function(request, response) {
+  router.get('/single-product/:productID', auth ,async function(request, response) {
       
       const productID = request.params.productID;
   
@@ -77,7 +78,7 @@ router.get('/new-releases', async function(request, response) {
   
   
   //add to cart -
-  router.post('/single-product/:productID', async function(request, response)  {
+  router.post('/single-product/:productID', auth ,async function(request, response)  {
   
      const product = request.body;
      request.body._id = ObjectId(request.body._id);

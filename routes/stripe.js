@@ -3,6 +3,8 @@ import {client} from '../index.js';
 const router = express.Router();
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
+import { auth } from '../middleware/auth.js';
+
 
 dotenv.config();
 
@@ -11,7 +13,7 @@ const stripe = Stripe(process.env.STRIPE_KEY);
 
 const CLIENT_URL = 'http://localhost:3000';
 
-router.post('/', async (request, response) => {
+router.post('/', auth , async (request, response) => {
 
   const cartItems = await client.db("hypekicks-db").collection("cart").find({}).toArray();
 
