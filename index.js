@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const PORT = 4000;
+const PORT = process.env.PORT;
 
 
 //server setup code
@@ -27,7 +27,7 @@ app.listen(PORT, function(request, response)  {
 })
 
 //mongo db connection code
-const MONGO_URL = "mongodb+srv://vishwaraj-admin:9637774387@cluster0.92hrg4g.mongodb.net";
+const MONGO_URL = process.env.MONGO_URL;
 
 async function createConnection() {
     const client = new MongoClient(MONGO_URL);
