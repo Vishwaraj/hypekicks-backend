@@ -11,6 +11,8 @@ import {profileRouter} from './routes/profilePage.js';
 import {loginRouter} from './routes/login.js';
 import { signInRouter } from './routes/signin.js';
 import {stripeRouter} from './routes/stripe.js';
+import { adminRouter } from './routes/admin.js';
+import { adminProductsRouter } from './routes/adminProducts.js';
 
 dotenv.config();
 
@@ -79,3 +81,10 @@ app.use("/login", loginRouter);
 
 
 app.use("/signup", signInRouter);
+
+
+//-----------------------------------ADMIN ROUTER CODE-------------------------------------------------
+
+app.use('/admin', adminRouter)
+
+app.use('/admin/products', adminProductsRouter)
