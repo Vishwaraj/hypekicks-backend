@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 const router = express.Router();
+import { adminAuth } from '../middleware/adminAuth.js';
 
 
 const genAdminHashPassword = async (password) => {
@@ -67,14 +68,14 @@ router.post('/login', async function(request, response) {
 })
 
 
-router.get('/users', async function(request, response) {
+router.get('/users', adminAuth ,async function(request, response) {
   const result = await client.db("hypekicks-db").collection("users").find({}).toArray();
   
   response.status(200).send(result);
 })
 
 
-router.delete('/users', async function(request, response) {
+router.delete('/users', adminAuth ,async function(request, response) {
   const id = request.body.id;
 
   const result = await client.db("hypekicks-db").collection("users").deleteOne({_id: ObjectId(id)});
@@ -88,7 +89,7 @@ router.delete('/users', async function(request, response) {
 
 //request to get all orders -
 
-router.get('/orders', async function(request, response) {
+router.get('/orders', adminAuth ,async function(request, response) {
   
   const result = await client.db("hypekicks-db").collection("orders").find({}).toArray();
 
