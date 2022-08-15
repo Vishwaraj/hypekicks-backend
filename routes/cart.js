@@ -15,7 +15,7 @@ router.post('/', auth , async function(request, response) {
 
 
 //remove product from cart-
-router.delete('/', async function(request, response) {
+router.delete('/', auth ,async function(request, response) {
     const id = request.body.id;
     
     const result = await client.db("hypekicks-db").collection("cart").deleteOne({_id: ObjectId(id)})
@@ -23,6 +23,19 @@ router.delete('/', async function(request, response) {
     console.log(result);
 
 })
+
+
+router.put('/', auth, async function(request, response) {
+
+    const id = request.body.id;
+    const quantity = request.body.quantity;
+
+    const result = await client.db("hypekicks-db").collection("cart").updateOne({_id: ObjectId(id)}, {$set: {quantity: quantity}})
+
+    response.status(200).send(result);
+
+})
+
 
 router.post('/billing-details', auth ,async function(request, response) {
   
