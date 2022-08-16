@@ -18,7 +18,7 @@ const checkUserExists = async (username) => {
 
 
 //function to login user -->  
-router.post('/', async function(request, response) {
+router.post('/', cors() ,async function(request, response) {
 
     //getting username and password
     const {username, password} = request.body;
