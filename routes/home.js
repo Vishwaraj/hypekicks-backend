@@ -6,6 +6,7 @@ import {auth} from '../middleware/auth.js';
 
 
 
+//function to send/get all sneakers -->
 router.get('/', auth ,async function(request, response) {
 
     
@@ -15,6 +16,9 @@ router.get('/', auth ,async function(request, response) {
 
 });
 
+
+
+//function to get new releases category sneakers -->
 router.get('/new-releases', auth ,async function(request, response) {
    
     const result = await client.db("hypekicks-db").collection("sneakers").find({
@@ -24,8 +28,9 @@ router.get('/new-releases', auth ,async function(request, response) {
   
   })
   
+ 
   
-  //route to get popular
+  //function to get popular category sneakers -->
   router.get('/popular', auth ,async function(request, response) {
       const result = await client.db("hypekicks-db").collection("sneakers").find({
           category: 'popular'
@@ -34,8 +39,9 @@ router.get('/new-releases', auth ,async function(request, response) {
       
   })
   
-  //route to get trending 
-  
+
+
+  //function to get trending category sneakers -->
   router.get('/trending', auth ,async function(request, response) {
       const result = await client.db("hypekicks-db").collection("sneakers").find({
           category: 'trending'
@@ -43,13 +49,16 @@ router.get('/new-releases', auth ,async function(request, response) {
       response.send(result);
   })
   
+
+
+  //function to get all sneakers -->
   router.get('/all', auth ,async function(request, response) {
       const result = await client.db("hypekicks-db").collection("sneakers").find({}).toArray();
       response.send(result);
   })
   
   
-  //route for single product
+  //function for single product -->
   router.get('/single-product/:productID', auth ,async function(request, response) {
       
       const productID = request.params.productID;
@@ -69,7 +78,7 @@ router.get('/new-releases', auth ,async function(request, response) {
   }) 
   
   
-  //check product already in cart --
+  //function to check product already in cart --
   const checkProductCart = async (id) => {
       let result = await client.db("hypekicks-db").collection("cart").findOne({_id: ObjectId(id)})
       
@@ -77,7 +86,7 @@ router.get('/new-releases', auth ,async function(request, response) {
   }
   
   
-  //add to cart -
+  //function to add sneaker to cart -
   router.post('/single-product/:productID', auth ,async function(request, response)  {
   
      const product = request.body;

@@ -6,13 +6,19 @@ import dotenv from 'dotenv';
 import { auth } from '../middleware/auth.js';
 
 
+//configuring dotenv
 dotenv.config();
 
 
+//getting the stripe key
 const stripe = Stripe(process.env.STRIPE_KEY);
 
+
+//setting the client url
 const CLIENT_URL = 'http://localhost:3000';
 
+
+//function to create payment gateway session -->
 router.post('/', auth , async (request, response) => {
 
   const cartItems = await client.db("hypekicks-db").collection("cart").find({}).toArray();

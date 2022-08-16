@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 
 
 
+//function to generate hashed password -->
 const genHashPassword = async (password) => {
     const NO_OF_ROUNDS = 10
     const salt = await bcrypt.genSalt(NO_OF_ROUNDS);
@@ -16,6 +17,7 @@ const genHashPassword = async (password) => {
  }
  
  
+//function to check user exists -->
  const checkUserExists = async (username) => {
    const userName = username;
  
@@ -24,13 +26,16 @@ const genHashPassword = async (password) => {
  }
  
  
- //for signup
+ //function for signup
  router.post('/', async function(request, response) {
      
+     //getting user from body
      const user = await request.body;
  
+     //checking user
      const checkUser = await checkUserExists(user.userName);
  
+     //generating hashed password
      const hashPassword = await genHashPassword(user.password);
  
  

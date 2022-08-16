@@ -6,8 +6,10 @@ const router = express.Router();
 
 
 
+//function to get all sneakers -->
 router.get('/all-sneakers', adminAuth ,async function(request, response) {
 
+    //getting admin token
     const adminToken = request.header('admin-auth-token');
 const result = await client.db("hypekicks-db").collection("sneakers").find({}).toArray();
 
@@ -18,6 +20,7 @@ response.status(200).send(latestFirstResult);
 })
 
 
+//function to add sneaker -->
 router.post('/add-sneakers', adminAuth ,async function(request, response) {
     const sneaker = request.body;
 
@@ -28,6 +31,7 @@ router.post('/add-sneakers', adminAuth ,async function(request, response) {
 })
 
 
+//function to delete a sneaker -->
 router.delete('/all-sneakers', adminAuth ,async function(request, response) {
     
     const id = request.body.id;
@@ -39,7 +43,7 @@ router.delete('/all-sneakers', adminAuth ,async function(request, response) {
 })
 
 
-//to get sneaker for updating
+//function to get sneaker for updating
 router.get("/update-sneakers/:id", adminAuth ,async function(request, response) {
     const { id } = request.params;
 
@@ -50,10 +54,13 @@ router.get("/update-sneakers/:id", adminAuth ,async function(request, response) 
 })
 
 
-//to update the sneaker --> 
+//function to update the sneaker --> 
 router.put("/update-sneakers/:id", adminAuth ,async function(request, response) {
 
+//getting sneaker id from params
 const { id } = request.params;
+
+//getting data from body
 const data = request.body;
 
 const result = await client.db("hypekicks-db").collection("sneakers").updateOne({_id: ObjectId(id)}, {$set: data})

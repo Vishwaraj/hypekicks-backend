@@ -14,12 +14,16 @@ import {stripeRouter} from './routes/stripe.js';
 import { adminRouter } from './routes/admin.js';
 import { adminProductsRouter } from './routes/adminProducts.js';
 
+
+//setting up dotenv
 dotenv.config();
 
+//setting up the app
 const app = express();
 app.use(express.json());
 app.use(cors());
 
+//getting the port
 const PORT = process.env.PORT;
 
 
@@ -27,6 +31,7 @@ const PORT = process.env.PORT;
 app.listen(PORT, function(request, response)  {
   console.log('Server is running on', PORT);
 })
+
 
 //mongo db connection code
 const MONGO_URL = process.env.MONGO_URL;
@@ -88,3 +93,4 @@ app.use("/signup", signInRouter);
 app.use('/admin', adminRouter)
 
 app.use('/admin/products', adminProductsRouter)
+

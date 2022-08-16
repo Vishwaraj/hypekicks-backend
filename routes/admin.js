@@ -8,6 +8,8 @@ const router = express.Router();
 import { adminAuth } from '../middleware/adminAuth.js';
 
 
+
+//generating admin hashed password -->
 const genAdminHashPassword = async (password) => {
   const NO_OF_ROUNDS = 10;
   const salt = await bcrypt.genSalt(NO_OF_ROUNDS);
@@ -16,16 +18,22 @@ const genAdminHashPassword = async (password) => {
 }
 
 
+//checking admin exists -->
 const checkAdminExists = async (adminName) => {
   const result = await client.db("hypekicks-db").collection("admins").findOne({adminName: adminName});
   return result;
 }
 
+
+//function to register admin -->
 router.post('/sign-up', async function (request, response) {
    
+ //getting admin name and password 
  const adminName = await request.body.adminName;
  const password = await request.body.password;
 
+
+ //checking admin exists
  const checkAdmin = await checkAdminExists(adminName);
  
  if(checkAdmin) {
@@ -48,11 +56,17 @@ router.post('/sign-up', async function (request, response) {
 })
 
 
+
+//funcion for admin login -->
 router.post('/login', async function(request, response) {
-    const admin = request.body;
+  
+  //getting admin name
+  const admin = request.body;
     
+  //checking admin exists
     const checkAdmin = await checkAdminExists(admin.adminName);
 
+  //comparing passwords
     const comparePassword = await bcrypt.compare(admin.password, checkAdmin.password);
 
     if(comparePassword) {
@@ -68,6 +82,8 @@ router.post('/login', async function(request, response) {
 })
 
 
+
+//function to get all users -->
 router.get('/users', adminAuth ,async function(request, response) {
   const result = await client.db("hypekicks-db").collection("users").find({}).toArray();
   
@@ -75,6 +91,7 @@ router.get('/users', adminAuth ,async function(request, response) {
 })
 
 
+//function to delete a user -->
 router.delete('/users', adminAuth ,async function(request, response) {
   const id = request.body.id;
 
@@ -87,8 +104,7 @@ router.delete('/users', adminAuth ,async function(request, response) {
 })
 
 
-//request to get all orders -
-
+//function to get all orders -
 router.get('/orders', adminAuth ,async function(request, response) {
   
   const result = await client.db("hypekicks-db").collection("orders").find({}).toArray();

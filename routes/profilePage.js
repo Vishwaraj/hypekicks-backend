@@ -5,6 +5,8 @@ import { auth } from '../middleware/auth.js';
 const router = express.Router();
 
 
+
+//function to update/add the address -->
 router.put('/addresses', auth ,async function(request, response) {
     const address = request.body;
     const userName = request.headers.username;
@@ -15,13 +17,11 @@ router.put('/addresses', auth ,async function(request, response) {
     console.log(findUser);
     response.send(findUser);
     
-
-
 })
 
 
 
-
+//function to get/send the ordered products -->
 router.post('/orders', auth ,async function(request, response) {
     
 const user = request.body.user;
@@ -39,6 +39,7 @@ response.send({result: result, products: orderedProducts});
 })
 
 
+//function to update account details -->
 router.put('/account-details', auth ,async function(request, response) {
     const user = request.body.user;
     const update = request.body.update;
@@ -50,6 +51,8 @@ router.put('/account-details', auth ,async function(request, response) {
     response.send(result);
 })
 
+
+//function to send initial data of user account details
 router.post('/account-details', auth ,async function(request, response) {
     const user = await request.body.user;
 

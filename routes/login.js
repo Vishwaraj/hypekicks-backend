@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 
 
 
+//function to check user already exists -->
 const checkUserExists = async (username) => {
     const userName = username;
   
@@ -15,12 +16,20 @@ const checkUserExists = async (username) => {
     return result
   }
 
+
+//function to login user -->  
 router.post('/', async function(request, response) {
+
+    //getting username and password
     const {username, password} = request.body;
     const user = request.body;
 
+
+    //checking user exists
     const checkUser = await checkUserExists(username)
 
+
+    //conditional code for further process
     if(!checkUser) {
         response.send({msg: 'Invalid Credentials'})
     } else {

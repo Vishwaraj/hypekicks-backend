@@ -6,6 +6,7 @@ const router = express.Router();
 
 
 
+//function to get/send all products in cart
 router.post('/', auth , async function(request, response) {
 
     const user = request.body.user;
@@ -14,7 +15,7 @@ router.post('/', auth , async function(request, response) {
 })
 
 
-//remove product from cart-
+//function to remove product from cart-
 router.delete('/', auth ,async function(request, response) {
     const id = request.body.id;
     
@@ -25,6 +26,7 @@ router.delete('/', auth ,async function(request, response) {
 })
 
 
+//function to update quantity of sneaker in cart
 router.put('/', auth, async function(request, response) {
 
     const id = request.body.id;
@@ -37,6 +39,8 @@ router.put('/', auth, async function(request, response) {
 })
 
 
+
+//function to get/send the address of user
 router.post('/billing-details', auth ,async function(request, response) {
   
     const username = request.body.username;
@@ -44,7 +48,8 @@ router.post('/billing-details', auth ,async function(request, response) {
     response.send(result.address);
 })
 
-// update address code - 
+
+//function to update address code - 
 router.put('/billing-details', auth ,async function(request, response) {
 
     const address = request.body;
@@ -55,7 +60,7 @@ router.put('/billing-details', auth ,async function(request, response) {
 })
 
 
-// Add sneakers to orders collection - 
+
 
 
 //find whether user already exists - 
@@ -67,7 +72,7 @@ const findUserOrders = async (username) => {
 
 
 
-
+// function to Add sneakers to orders collection - 
 router.post('/order-success', auth ,async function(request, response) {
     const username = await request.body.username;
 
