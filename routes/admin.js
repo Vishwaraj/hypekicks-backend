@@ -8,6 +8,7 @@ const router = express.Router();
 import { adminAuth } from '../middleware/adminAuth.js';
 
 
+dotenv.config();
 
 //generating admin hashed password -->
 const genAdminHashPassword = async (password) => {

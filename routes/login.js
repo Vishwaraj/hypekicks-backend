@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 import cors from 'cors';
 
 
+dotenv.config();
 
 router.use(cors());
 
