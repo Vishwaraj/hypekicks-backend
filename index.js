@@ -26,7 +26,7 @@ app.use(cors());
 app.use(express.json());
 
 
-
+  
 //getting the port
 const PORT = process.env.PORT;
 
