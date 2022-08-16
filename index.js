@@ -26,7 +26,7 @@ app.use(cors());
 //getting the port
 const PORT = process.env.PORT;
 
-
+ 
 //server setup code
 app.listen(PORT, function(request, response)  {
   console.log('Server is running on', PORT);
@@ -57,6 +57,11 @@ app.post('/', async function(request, response) {
     console.log(status);
 
 });
+
+
+app.get('/', async function(request, response) {
+  response.status(200).send({message: 'Backend Connected'})
+})
 
 
 //-------------------------------APP ROUTES-------------------------------------------
