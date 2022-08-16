@@ -2,11 +2,11 @@ import express from 'express';
 import {client} from '../index.js';
 import dotenv from 'dotenv';
 import { ObjectId } from 'mongodb';
-dotenv.config();
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import cors from 'cors';
 
+dotenv.config();
 
 const router = express.Router();
 
