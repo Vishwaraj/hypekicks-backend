@@ -5,9 +5,11 @@ const router = express.Router();
 import bcrypt from "bcrypt";
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import cors from 'cors';
 
 
 
+router.use(cors());
 
 //function to check user already exists -->
 const checkUserExists = async (username) => {
