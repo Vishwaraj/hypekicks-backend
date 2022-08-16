@@ -22,7 +22,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: "https://joyful-shortbread-7b3c03.netlify.app"
+  origin: "*",
 }));
 
 //getting the port
