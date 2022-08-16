@@ -22,7 +22,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: "*",
+  origin: "https://joyful-shortbread-7b3c03.netlify.app",
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: "*"
 }));
