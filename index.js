@@ -32,6 +32,7 @@ app.use(cors({
 //getting the port
 const PORT = process.env.PORT;
 
+app.options('*', cors());
 
 app.use(function(request, response, next) {
   response.header("Access-Control-Allow-Origin", "*");
