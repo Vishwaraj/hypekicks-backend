@@ -5,7 +5,7 @@ const router = express.Router();
 import bcrypt from "bcrypt";
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import cors from 'cors';
+
 
 
 
@@ -19,7 +19,7 @@ const checkUserExists = async (username) => {
 
 
 //function to login user -->  
-router.post('/', cors() ,async function(request, response) {
+router.post('/', async function(request, response) {
 
     //getting username and password
     const {username, password} = request.body;
