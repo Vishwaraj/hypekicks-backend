@@ -15,7 +15,7 @@ const stripe = Stripe(process.env.STRIPE_KEY);
 
 
 //setting the client url
-const CLIENT_URL = 'http://localhost:3000';
+const CLIENT_URL = 'https://joyful-shortbread-7b3c03.netlify.app';
 
 
 //function to create payment gateway session -->
