@@ -20,10 +20,12 @@ dotenv.config();
 
 //setting up the app
 const app = express();
+app.use(cors());
+
+
 app.use(express.json());
 
-app.use(cors());
-app.options('*', cors());
+
 
   // methods: ['GET', 'POST', 'PUT', 'DELETE'],
   // allowedHeaders: "*"
