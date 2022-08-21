@@ -15,8 +15,8 @@ const stripe = Stripe(process.env.STRIPE_KEY);
 
 
 //setting the client url
-// const CLIENT_URL = 'https://joyful-shortbread-7b3c03.netlify.app';
-const CLIENT_URL = 'http://localhost:3000';
+const CLIENT_URL = 'https://joyful-shortbread-7b3c03.netlify.app';
+// const CLIENT_URL = 'http://localhost:3000';
 
 
 //function to create payment gateway session -->
@@ -25,10 +25,6 @@ router.post('/', auth , async (request, response) => {
   const cartItems = await client.db("hypekicks-db").collection("cart").find({}).toArray();
 
   const line_items = cartItems.map((sneaker)=>{
-    // if(sneaker.image.length > 10000) {
-    //   sneaker.image = `data:image/jpeg;base64,${sneaker.image}`
-    // }
-    // console.log(sneaker.image);
     return (
         {
             price_data: {
