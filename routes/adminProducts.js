@@ -1,10 +1,26 @@
-import express from 'express';
+import express, { request } from 'express';
 import {client} from '../index.js';
 import { ObjectId } from 'mongodb';
 import { adminAuth } from '../middleware/adminAuth.js';
+import multer from 'multer';
+import fs from 'fs';
+import path from 'path';
+
+
+
+
 const router = express.Router();
 
+// const storage = multer.diskStorage({
+//     destination: function(req, file, cb) {
+//         cb(null, '../uploads')
+//     },
+//     filename: function(req, file, cb) {
+//         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+//     }
+// })
 
+const upload = multer({ dest: "uploads/" });
 
 //function to get all sneakers -->
 router.get('/all-sneakers', adminAuth ,async function(request, response) {
@@ -21,10 +37,19 @@ response.status(200).send(latestFirstResult);
 
 
 //function to add sneaker -->
-router.post('/add-sneakers', adminAuth ,async function(request, response) {
-    const sneaker = request.body;
+router.post('/add-sneakers', adminAuth ,upload.single('image') ,async function(request, response) {
 
-    const result = await client.db("hypekicks-db").collection("sneakers").insertOne(sneaker);
+    const image = fs.readFileSync(request.file.path);
+
+    const encodedImage = await image.toString('base64');
+
+    const finalImage = Buffer.from(encodedImage, 'base64');
+
+    const finalSneaker = {...request.body, image: finalImage};
+
+    console.log(finalSneaker)
+
+    const result = await client.db("hypekicks-db").collection("sneakers").insertOne(finalSneaker);
 
     response.status(201).send(result);
 
@@ -55,13 +80,20 @@ router.get("/update-sneakers/:id", adminAuth ,async function(request, response) 
 
 
 //function to update the sneaker --> 
-router.put("/update-sneakers/:id", adminAuth ,async function(request, response) {
+router.put("/update-sneakers/:id", adminAuth, upload.single('image') ,async function(request, response) {
+
+    const image = fs.readFileSync(request.file.path)
+    const encodedImage = await image.toString('base64');
+    const finalImage = Buffer.from(encodedImage, 'base64');
+
+
 
 //getting sneaker id from params
 const { id } = request.params;
 
 //getting data from body
-const data = request.body;
+const data = {...request.body, image: finalImage};
+console.log(data)
 
 const result = await client.db("hypekicks-db").collection("sneakers").updateOne({_id: ObjectId(id)}, {$set: data})
 
