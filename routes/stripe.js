@@ -22,8 +22,13 @@ const CLIENT_URL = 'https://joyful-shortbread-7b3c03.netlify.app';
 //function to create payment gateway session -->
 router.post('/', auth , async (request, response) => {
 
-  const cartItems = await client.db("hypekicks-db").collection("cart").find({}).toArray();
+  const username = request.body.username
 
+  console.log('yeee');
+
+  const cartItems = await client.db("hypekicks-db").collection("cart").find({user: username}).toArray();
+
+ 
   const line_items = cartItems.map((sneaker)=>{
     return (
         {

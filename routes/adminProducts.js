@@ -46,6 +46,7 @@ router.post('/add-sneakers', adminAuth ,upload.single('image') ,async function(r
     const finalImage = Buffer.from(encodedImage, 'base64');
 
     const finalSneaker = {...request.body, image: finalImage};
+    finalSneaker.price = Number(finalSneaker.price);
 
     console.log(finalSneaker)
 
@@ -91,9 +92,13 @@ router.put("/update-sneakers/:id", adminAuth, upload.single('image') ,async func
 //getting sneaker id from params
 const { id } = request.params;
 
+//converting to number 
+request.body.price = Number(request.body.price);
+
 //getting data from body
 const data = {...request.body, image: finalImage};
 console.log(data)
+
 
 const result = await client.db("hypekicks-db").collection("sneakers").updateOne({_id: ObjectId(id)}, {$set: data})
 

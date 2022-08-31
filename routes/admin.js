@@ -112,7 +112,26 @@ router.get('/orders', adminAuth ,async function(request, response) {
 
   response.status(200).send(result);
   
+})
+
+
+//API to get single user ->
+router.get('/users/:username', async function(request, response) {
+
+const user = request.params.username;
+
+try {
+  const result = await client.db("hypekicks-db").collection("orders").find({user: user}).toArray();
+
+  const username = await client.db("hypekicks-db").collection("users").findOne({userName: user});
+
+  response.send({userData: username,  orders: result});
+} catch (error) {
+  console.log(error);
+}
 
 })
+
+
 
 export const adminRouter = router;

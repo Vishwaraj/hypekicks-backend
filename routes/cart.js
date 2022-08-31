@@ -2,6 +2,11 @@ import express from 'express';
 import {client} from '../index.js';
 import { ObjectId } from 'mongodb';
 import {auth} from '../middleware/auth.js';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+dotenv.config()
+
 const router = express.Router();
 
 
@@ -18,8 +23,14 @@ router.post('/', auth , async function(request, response) {
 //function to remove product from cart-
 router.delete('/', auth ,async function(request, response) {
     const id = request.body.id;
+    const user = request.body.username;
     
-    const result = await client.db("hypekicks-db").collection("cart").deleteOne({_id: ObjectId(id)})
+    const result = await client.db("hypekicks-db").collection("cart").deleteOne({
+      $and: [
+        {_id: ObjectId(id)},
+        {user: user}
+      ]    
+    })
     response.send(result);
     console.log(result);
 
@@ -78,6 +89,7 @@ router.post('/order-success', auth ,async function(request, response) {
 
 
     const products = await client.db("hypekicks-db").collection("cart").find({}).toArray();
+    const userEmail = await client.db("hypekicks-db").collection("users").findOne({userName: username})
 
 
     const currentDate = new Date().toLocaleDateString();
@@ -94,6 +106,32 @@ router.post('/order-success', auth ,async function(request, response) {
         console.log('another result', result)
 
         const emptyCart = await client.db("hypekicks-db").collection("cart").deleteMany({});
+
+        //sending order success email -->
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "hypekicks74@gmail.com",
+                pass: process.env.EMAIL_PASS
+            }
+        })
+
+
+        const options = {
+            from: "hypekicks74@gmail.com",
+            to: userEmail.email,
+            subject: "Order Successfully Placed!",
+            text: `Your order has been placed successfully on ${currentDate}, it will be delivered in 7-10 business days.`
+        }
+
+        transporter.sendMail(options, function(error, info) {
+            if(error) {
+                console.log(error)
+            } 
+            console.log( "Sent email: ", info);
+        })
+
+
         response.send({result:result, emptyCart:emptyCart});
 
 
