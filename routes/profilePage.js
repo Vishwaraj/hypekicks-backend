@@ -34,7 +34,9 @@ result.map((order) => {
 })
 console.log(orderedProducts);
 
-response.send({result: result, products: orderedProducts});
+const latestFirstResult = result.reverse();
+
+response.send({result: latestFirstResult, products: orderedProducts});
 
 })
 
