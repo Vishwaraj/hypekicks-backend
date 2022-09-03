@@ -88,7 +88,7 @@ router.post('/order-success', auth ,async function(request, response) {
     const username = await request.body.username;
 
 
-    const products = await client.db("hypekicks-db").collection("cart").find({}).toArray();
+    const products = await client.db("hypekicks-db").collection("cart").find({user: username}).toArray();
     const userEmail = await client.db("hypekicks-db").collection("users").findOne({userName: username})
 
 
@@ -105,7 +105,7 @@ router.post('/order-success', auth ,async function(request, response) {
         const result = await client.db("hypekicks-db").collection("orders").insertOne(order);
         console.log('another result', result)
 
-        const emptyCart = await client.db("hypekicks-db").collection("cart").deleteMany({});
+        const emptyCart = await client.db("hypekicks-db").collection("cart").deleteMany({user: username});
 
         //sending order success email -->
         const transporter = nodemailer.createTransport({
