@@ -9,8 +9,7 @@ import {auth} from '../middleware/auth.js';
 //function to send/get all sneakers -->
 router.get('/', auth ,async function(request, response) {
     const sort = request.header("sort-price");
-    console.log(sort);
-    
+      
     const result = await client.db("hypekicks-db").collection("sneakers").find({}).toArray();
 
     if(sort === '') {
@@ -20,12 +19,33 @@ router.get('/', auth ,async function(request, response) {
         response.send(result)
     } else if (sort === 'high-to-low') {
         result.sort((a,b) => a.price - b.price)
-        
         response.send(result)
     }
 
 });
 
+
+//route to get sneakers with ratings
+router.post('/rating', async function (request, response) {
+    const rating = Number(request.body.rating);
+    console.log(rating);
+    const result = await client.db("hypekicks-db").collection("sneakers").find({}).toArray();
+    
+        if(rating < 3) {
+          response.status(200).send(result);
+        } else {
+            try {
+            
+                const ratedArr = await result.filter((product) => {
+                     return product.rating === rating
+                })
+                response.status(200).send(ratedArr);
+            } catch (error) {
+                response.status(400).send(error);
+            }
+        }
+
+})
 
 
 //function to get new releases category sneakers -->
