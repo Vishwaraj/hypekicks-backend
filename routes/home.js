@@ -52,7 +52,7 @@ router.post('/rating', async function (request, response) {
 router.get('/new-releases', auth ,async function(request, response) {
    
     const result = await client.db("hypekicks-db").collection("sneakers").find({
-      category: 'new-releases'
+      category: 'new releases'
     }).toArray();
     response.send(result);
   
